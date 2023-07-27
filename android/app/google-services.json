@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "257762421649",
+    "project_id": "warak-b0c8c",
+    "storage_bucket": "warak-b0c8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257762421649:android:7ec4e665fdae5cd8084830",
+        "android_client_info": {
+          "package_name": "com.example.warak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257762421649-4u93lrao6b06d2f7fjc2sjkdqjkpn5ir.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1oBYqUPOB3l3GnHwfEKGELHIW4o70pe4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257762421649-4u93lrao6b06d2f7fjc2sjkdqjkpn5ir.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

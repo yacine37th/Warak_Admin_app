@@ -426,6 +426,10 @@ class _addBooksState extends State<addBooks> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: ElevatedButton(
+                       style: ButtonStyle(
+                  backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
+                  
+                  ),
                       onPressed: () => pickimage(),
                       child: const Text('Select Picture of the book'),
                     ),
@@ -434,6 +438,10 @@ class _addBooksState extends State<addBooks> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: ElevatedButton(
+                       style: ButtonStyle(
+                  backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
+                  
+                  ),
                       onPressed: selectFile,
                       child: const Text('Select File'),
                     ),
@@ -442,6 +450,10 @@ class _addBooksState extends State<addBooks> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: ElevatedButton(
+                       style: ButtonStyle(
+                  backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
+                  
+                  ),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           createBook();

@@ -150,6 +150,10 @@ class _addCustomCategoryState extends State<addCustomCategory> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: ElevatedButton(
+                     style: ButtonStyle(
+                  backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
+                  
+                  ),
                     // onPressed: 
                     // ()=>   NewCustomCat(),
                     onPressed: () {

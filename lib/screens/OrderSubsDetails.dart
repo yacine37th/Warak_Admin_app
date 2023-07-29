@@ -86,56 +86,97 @@ class OrderSubsDetails extends StatelessWidget {
                   child: Center(
                     child: Image.network('${detail['orderProofImageURL']}',
                         width: 400,
-                        height: 400,
-                         errorBuilder: (BuildContext context,
+                        height: 400, errorBuilder: (BuildContext context,
                             Object exception, StackTrace? stackTrace) {
                       return Image.network(
                           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxFLlzVp2jEn2Kx38_HsZiHYKtBJtQxxTg810DIpZS&s");
                     }),
-                  )
-              ),
+                  )),
 
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: ElevatedButton(
-                  onPressed: () {
-                    print("object");
-                    print("object//////////////////////////");
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(32, 48, 61, 1))),
+                      onPressed: () {
+                        print("object");
+                        print("object//////////////////////////");
 
-                    print(detail['orderID']);
+                        print(detail['orderID']);
 
-                    var docauth = db
-                        .collection("orderMaxSubscriptions")
-                        .doc(detail['orderID']);
-                    confirm = true;
-                    docauth.update({
-                      // "authorID" : docauth.id,
-                      // "authorName": bookAuthorName.text,
-                      "orderPayed?": confirm,
-                    }).onError((e, _) => print(
-                        "Error writing document /////////////////////////////////////////////: $e"));
+                        var docauth = db
+                            .collection("orderMaxSubscriptions")
+                            .doc(detail['orderID']);
+                        confirm = true;
+                        docauth.update({
+                          // "authorID" : docauth.id,
+                          // "authorName": bookAuthorName.text,
+                          "orderPayed?": confirm,
+                        }).onError((e, _) => print(
+                            "Error writing document /////////////////////////////////////////////: $e"));
+                        print("users");
+                        var doc =
+                            db.collection("users").doc(detail['orderClientID']);
+                        doc.update({
+                          // "authorID" : docauth.id,
+                          // "authorName": bookAuthorName.text,
+                          "userIsSubbed": true,
+                        }).onError((e, _) => print(
+                            "Error writing document /////////////////////////////////////////////: $e"));
 
-                    var doc =
-                        db.collection("users").doc(detail['orderClientID']);
-                    doc.update({
-                      // "authorID" : docauth.id,
-                      // "authorName": bookAuthorName.text,
-                      "userIsSubbed": true,
-                    }).onError((e, _) => print(
-                        "Error writing document /////////////////////////////////////////////: $e"));
+                        final DateTime dateTime = new DateTime.now();
+                        var newDate = new DateTime(
+                            dateTime.year, dateTime.month + 1, dateTime.day);
+                        print("deddeded");
+                        doc.update({
+                          "userSubEndingingDay": newDate,
+                          "userSubStartingDay": dateTime,
+                        }).onError((e, _) => print(
+                            "Error writing document /////////////////////////////////////////////: $e"));
 
-                    final DateTime dateTime = new DateTime.now();
-                    var newDate = new DateTime(dateTime.year, dateTime.month + 1, dateTime.day);
-                    doc.update({
-                      "userSubEndingingDay": newDate,
-                      "userSubStartingDay": dateTime,
-                    }).onError((e, _) => print(
-                        "Error writing document /////////////////////////////////////////////: $e"));
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Confirmm'),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   width: 25.0,
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: 18),
+                  //   child: ElevatedButton(
+                  //     style: ButtonStyle(
+                  //       backgroundColor: MaterialStateProperty.all(Colors.red),
+                  //     ),
+                  //     onPressed: () {
+                  //       print("object");
+                  //       print("object//////////////////////////");
 
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Confirmm'),
-                ),
+                  //       print(detail['orderID']);
+
+                  //       var docauth = db
+                  //           .collection("orderMaxSubscriptions")
+                  //           .doc(detail['orderID']);
+
+                  //       docauth.delete().onError((e, _) => print(
+                  //           "Error writing document /////////////////////////////////////////////: $e"));
+
+                  //       // Navigator.pushAndRemoveUntil(
+                  //       //   context,
+                  //       //   MaterialPageRoute(
+                  //       //       builder: (context) => OrdersElectronique()),
+                  //       //   (Route<dynamic> route) => false,
+                  //       // );
+                  //       Navigator.of(context).pop();
+                  //     },
+                  //     child: Text('Delete'),
+                  //   ),
+                  // ),
+                ],
               ),
             ]),
           ),

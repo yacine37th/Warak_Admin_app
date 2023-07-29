@@ -15,7 +15,9 @@ class _OrderSubsState extends State<OrderSubs> {
   final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
       .collection('orderMaxSubscriptions')
       .where('orderPayed?', isEqualTo: false)
+      // .orderBy('orderDate',descending: true)
       // .orderBy("orderDate",descending: true)
+      // .orderBy("orderID")
       .snapshots();
 
   @override

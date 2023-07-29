@@ -54,7 +54,7 @@ class _UpdatesubscriptionState extends State<Updatesubscription> {
           "subscriptionNewPromoPrice":
               double.parse(subscriptionNewPromoPrice.text),
           "subscriptionPrice": double.parse(subscriptionPrice.text),
-          // "subscriptionProsList": FieldValue.arrayUnion(subscriptionProsList2),
+          "subscriptionProsList": FieldValue.arrayUnion(subscriptionProsList2),
           "subscriptionText": subscriptionText.text,
         }).onError((e, _) => print(
             "Error writing document /////////////////////////////////////////////: $e"));
@@ -153,64 +153,68 @@ class _UpdatesubscriptionState extends State<Updatesubscription> {
                   ),
                   // subscriptionProsList
 
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 30),
-                      child: Column(
-                        children: [
-                          Text("${sub.map(
-                            (book) => "${book}\n",
-                          )}"),
-                        ],
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 30),
-                    child: TextFormField(
-                      // minLines: 3,
-                      // maxLines: 8,
-                      // keyboardType: TextInputType.multiline,
-                      controller: subscriptionProsList,
-                      // initialValue:subscriptionPrice ,
-                      onChanged: (value) => {
-                        if (value != "")
-                          {}
-                      },
-                      onSaved: (newValue) => {
-                        setState(() {
-                          test = newValue;
-                        }),
-                      },
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        border: OutlineInputBorder(),
-                        hintText: "Enter the Subscription ProsList",
-                        labelText: 'Subscription ProsList',
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 30),
-                    child: TextFormField(
-                      // minLines: 3,
-                      // maxLines: 8,
-                      // keyboardType: TextInputType.multiline,
-                      controller: subscriptionText,
-                      // initialValue:subscriptionPrice ,
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        border: OutlineInputBorder(),
-                        hintText: "Enter the Subscription Text",
-                        labelText: 'Subscription Text',
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //     padding: const EdgeInsets.symmetric(
+                  //         vertical: 15, horizontal: 30),
+                  //     child: Column(
+                  //       children: [
+                  //         Text("${sub.map(
+                  //           (book) => "${book}\n",
+                  //         )}"),
+                  //       ],
+                  //     )),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //       vertical: 15, horizontal: 30),
+                  //   child: TextFormField(
+                  //     // minLines: 3,
+                  //     // maxLines: 8,
+                  //     // keyboardType: TextInputType.multiline,
+                  //     controller: subscriptionProsList,
+                  //     // initialValue:subscriptionPrice ,
+                  //     onChanged: (value) => {
+                  //       if (value != "")
+                  //         {}
+                  //     },
+                  //     onSaved: (newValue) => {
+                  //       setState(() {
+                  //         test = newValue;
+                  //       }),
+                  //     },
+                  //     decoration: InputDecoration(
+                  //       alignLabelWithHint: true,
+                  //       border: OutlineInputBorder(),
+                  //       hintText: "Enter the Subscription ProsList",
+                  //       labelText: 'Subscription ProsList',
+                  //     ),
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //       vertical: 15, horizontal: 30),
+                  //   child: TextFormField(
+                  //     // minLines: 3,
+                  //     // maxLines: 8,
+                  //     // keyboardType: TextInputType.multiline,
+                  //     controller: subscriptionText,
+                  //     // initialValue:subscriptionPrice ,
+                  //     decoration: InputDecoration(
+                  //       alignLabelWithHint: true,
+                  //       border: OutlineInputBorder(),
+                  //       hintText: "Enter the Subscription Text",
+                  //       labelText: 'Subscription Text',
+                  //     ),
+                  //   ),
+                  // ),
           
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: ElevatedButton(
+                       style: ButtonStyle(
+                  backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
+                  
+                  ),
                       onPressed: () {
                         updatePromo();
                         Navigator.pushAndRemoveUntil(

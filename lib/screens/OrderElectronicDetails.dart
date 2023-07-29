@@ -75,13 +75,12 @@ class OrderElectronicDetails extends StatelessWidget {
             //       child: Image.network('${test['orderProofImageURL']}'),
             //     )),
 
-                    Padding(
+            Padding(
                 padding: EdgeInsets.symmetric(vertical: 15),
                 child: Center(
                   child: Image.network('${test['orderProofImageURL']}',
-                    width: 300,
-                      height: 300,
-                       errorBuilder: (BuildContext context,
+                      width: 300,
+                      height: 300, errorBuilder: (BuildContext context,
                           Object exception, StackTrace? stackTrace) {
                     return Image.network(
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxFLlzVp2jEn2Kx38_HsZiHYKtBJtQxxTg810DIpZS&s");
@@ -89,52 +88,96 @@ class OrderElectronicDetails extends StatelessWidget {
                 )
                 // Image.network(detail['orderProofImageURL'] , ),
                 ),
-  
 
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 18),
-              child: ElevatedButton(
-                onPressed: () {
-                  print("object");
-                  print("object//////////////////////////");
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 18),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromRGBO(32, 48, 61, 1))),
+                    onPressed: () {
+                      print("object");
+                      print("object//////////////////////////");
 
-                  print(test['orderID']);
+                      print(test['orderID']);
 
-                  var docauth =
-                      db.collection("ordersElectronic").doc(test['orderID']);
-                  confirm = true;
-                  docauth.update({
-                    // "authorID" : docauth.id,
-                    // "authorName": bookAuthorName.text,
-                    "orderPayed?": confirm,
-                  }).onError((e, _) => print(
-                      "Error writing document /////////////////////////////////////////////: $e"));
+                      var docauth = db
+                          .collection("ordersElectronic")
+                          .doc(test['orderID']);
+                      confirm = true;
+                      docauth.update({
+                        // "authorID" : docauth.id,
+                        // "authorName": bookAuthorName.text,
+                        "orderPayed?": confirm,
+                      }).onError((e, _) => print(
+                          "Error writing document /////////////////////////////////////////////: $e"));
 
+                      var doc =
+                          db.collection("users").doc(test['orderClientID']);
+                      doc.update({
+                        // "authorID" : docauth.id,
+                        // "authorName": bookAuthorName.text,
+                        "userMaktabati":
+                            FieldValue.arrayUnion([test["orderBookID"]]),
+                      }).onError((e, _) => print(
+                          "Error writing document /////////////////////////////////////////////: $e"));
+                      doc.update({
+                        // "authorID" : docauth.id,
+                        // "authorName": bookAuthorName.text,
+                        "userOrdersElectronicBooks":
+                            FieldValue.arrayRemove([test["orderBookID"]]),
+                      }).onError((e, _) => print(
+                          "Error writing document /////////////////////////////////////////////: $e"));
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => OrdersElectronique()),
+                      //   (Route<dynamic> route) => false,
+                      // );
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Confirmm'),
+                  ),
+                ),
+                // SizedBox(
+                //   width: 25.0,
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(vertical: 18),
+                //   child: ElevatedButton(
+                //     style: ButtonStyle(
+                //       backgroundColor: MaterialStateProperty.all(Colors.red),
+                //     ),
+                //     onPressed: () {
+                //       print("object");
+                //       print("object//////////////////////////");
 
-                            var doc = db.collection("users").doc(test['orderClientID']);
-    doc.update({
-      // "authorID" : docauth.id,
-      // "authorName": bookAuthorName.text,
-      "userMaktabati": FieldValue.arrayUnion([test["orderBookID"]]),
-    }).onError((e, _) => print(
-        "Error writing document /////////////////////////////////////////////: $e"));
-         doc.update({
-      // "authorID" : docauth.id,
-      // "authorName": bookAuthorName.text,
-      "userOrdersElectronicBooks": FieldValue.arrayRemove([test["orderBookID"]]),
-    }).onError((e, _) => print(
-        "Error writing document /////////////////////////////////////////////: $e"));
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => OrdersElectronique()),
-                  //   (Route<dynamic> route) => false,
-                  // );
-                  Navigator.of(context).pop();
-                },
-                child: Text('Confirmm'),
-              ),
-            )
+                //       print(test['orderID']);
+
+                //       var docauth = db
+                //           .collection("ordersElectronic")
+                //           .doc(test['orderID']);
+
+                //       docauth.delete().onError((e, _) => print(
+                //           "Error writing document /////////////////////////////////////////////: $e"));
+
+                //       // Navigator.pushAndRemoveUntil(
+                //       //   context,
+                //       //   MaterialPageRoute(
+                //       //       builder: (context) => OrdersElectronique()),
+                //       //   (Route<dynamic> route) => false,
+                //       // );
+                //       Navigator.of(context).pop();
+                //     },
+                //     child: Text('Delete'),
+                //   ),
+                // ),
+           
+              ],
+            ),
           ]),
         ),
       ),

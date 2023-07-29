@@ -63,9 +63,11 @@ class _AddNewBookcarouselState extends State<AddNewBookcarousel> {
   var db = FirebaseFirestore.instance;
   Future addNewCarousel() async {
     var catepic = "";
-    var docauth = db.collection("carousel").doc();
+      var test = db.collection("carousel").doc();
+   
+  
     if (categorieImage != null) {
-      final path = 'carousel/${docauth.id}';
+      final path = 'carousel/${test.id}';
       final file = File(categorieImage!.path);
 
       final ref = FirebaseStorage.instance.ref().child(path);
@@ -79,15 +81,19 @@ class _AddNewBookcarouselState extends State<AddNewBookcarousel> {
       print(catepic);
     }
 
-    if (shouldDisplay2) {
+    if (shouldDisplay2 == true) {
+       var docauth = db.collection("carousel").doc(
+      _selectedValue["id"]
+      );
       docauth.set({
         "carouselIsBook": shouldDisplay2,
         "bookID": _selectedValue["id"],
         "carouselThumbnail": catepic,
       }).onError((e, _) => print(
           "Error writing document /////////////////////////////////////////////: $e"));
-    } else {
-      docauth.set({
+    } else if(shouldDisplay2 == false) {
+      print("z///////////////////////////////////////////////////////yacine");
+      test.set({
         "carouselIsBook": shouldDisplay2,
         "carouselThumbnail": catepic,
         "carouselUrl": carouselUrl.text,
@@ -194,12 +200,12 @@ class _AddNewBookcarouselState extends State<AddNewBookcarousel> {
                           // maxLines: 8,
                           // keyboardType: TextInputType.multiline,
                           controller: carouselUrl,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter the URL of the picture';
-                            }
-                            return null;
-                          },
+                          // validator: (value) {
+                          //   if (value == null || value.isEmpty) {
+                          //     return 'Please enter the URL of the picture';
+                          //   }
+                          //   return null;
+                          // },
                           decoration: InputDecoration(
                             alignLabelWithHint: true,
                             border: OutlineInputBorder(),
@@ -213,6 +219,10 @@ class _AddNewBookcarouselState extends State<AddNewBookcarousel> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   child: ElevatedButton(
+                     style: ButtonStyle(
+                  backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
+                  
+                  ),
                     onPressed: () => pickimage(),
                     child: const Text('Select Picture of the book'),
                   ),
@@ -275,6 +285,10 @@ class _AddNewBookcarouselState extends State<AddNewBookcarousel> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: ElevatedButton(
+                     style: ButtonStyle(
+                  backgroundColor:  MaterialStateProperty.all(Color.fromRGBO(32, 48, 61, 1))
+                  
+                  ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         addNewCarousel();

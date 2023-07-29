@@ -20,27 +20,40 @@ class OrderWaraqiDetails extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical:25.0),
+            padding: const EdgeInsets.symmetric(vertical: 25.0),
             child: Column(children: [
-              Text('Book Title : ${test['orderBookTitle']}', style: TextStyle(fontSize: 18),),
+              Text(
+                'Book Title : ${test['orderBookTitle']}',
+                style: TextStyle(fontSize: 18),
+              ),
               // order3onwan
-                  Text("First Name : ${test['orderClientFirstName']}", style: TextStyle(fontSize: 18)),
-              Text("Last Name : ${test['orderClientLastName']}", style: TextStyle(fontSize: 18)),
-                 Text("Email : ${test['orderClientEmail']}", style: TextStyle(fontSize: 18)),
-        
-                 Text("Wilaya : ${test['orderWilaya']}", style: TextStyle(fontSize: 18)),
-                  Text("Baladiya : ${test['orderBaladiya']}", style: TextStyle(fontSize: 18)),
-          
-                      Text("Address : ${test['order3onwan']}", style: TextStyle(fontSize: 18)),
-                            Text("Price : ${test['orderPrice']}", style: TextStyle(fontSize: 18)),
-              Text("Phone : ${test['orderPhoneNumber']}", style: TextStyle(fontSize: 18)), 
-               Text(
-                      'Order Date : ${DateTime.parse(test['orderDate'].toDate().toString())}', style: TextStyle(fontSize: 18),),
+              Text("First Name : ${test['orderClientFirstName']}",
+                  style: TextStyle(fontSize: 18)),
+              Text("Last Name : ${test['orderClientLastName']}",
+                  style: TextStyle(fontSize: 18)),
+              Text("Email : ${test['orderClientEmail']}",
+                  style: TextStyle(fontSize: 18)),
+
+              Text("Wilaya : ${test['orderWilaya']}",
+                  style: TextStyle(fontSize: 18)),
+              Text("Baladiya : ${test['orderBaladiya']}",
+                  style: TextStyle(fontSize: 18)),
+
+              Text("Address : ${test['order3onwan']}",
+                  style: TextStyle(fontSize: 18)),
+              Text("Price : ${test['orderPrice']}",
+                  style: TextStyle(fontSize: 18)),
+              Text("Phone : ${test['orderPhoneNumber']}",
+                  style: TextStyle(fontSize: 18)),
+              Text(
+                'Order Date : ${DateTime.parse(test['orderDate'].toDate().toString())}',
+                style: TextStyle(fontSize: 18),
+              ),
               // Text(test['orderID']),
               // orderDate
-           
+
               // Text(test['orderDate']),
-        
+
               // Padding(
               //     padding: EdgeInsets.symmetric(vertical: 15),
               //     child: Center(
@@ -49,48 +62,91 @@ class OrderWaraqiDetails extends StatelessWidget {
               //     // Image.network(test['orderProofImageURL'] , ),
               //     ),
 
-                    Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: Center(
-                  child: Image.network('${test['orderProofImageURL']}',
-                      width: 300,
-                      height: 300,
-                       errorBuilder: (BuildContext context,
-                          Object exception, StackTrace? stackTrace) {
-                    return Image.network(
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxFLlzVp2jEn2Kx38_HsZiHYKtBJtQxxTg810DIpZS&s");
-                  }),
-                )
-                // Image.network(detail['orderProofImageURL'] , ),
-                ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: ElevatedButton(
-                  onPressed: () {
-                    print("object");
-                    print("object//////////////////////////");
-        
-                    print(test['orderID']);
-        
-                    var docauth =
-                        db.collection("ordersPhysical").doc(test['orderID']);
-                    confirm = true;
-                    docauth.update({
-                      // "authorID" : docauth.id,
-                      // "authorName": bookAuthorName.text,
-                      "orderPayed?": confirm,
-                    }).onError((e, _) => print(
-                        "Error writing document /////////////////////////////////////////////: $e"));
-                    //     Navigator.pushAndRemoveUntil(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => HomeScreen()),
-                    //   (Route<dynamic> route) => false,
-                    // );
-                     
-    Navigator.of(context).pop();
-                  },
-                  child: Text('Confirmm'),
-                ),
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  child: Center(
+                    child: Image.network('${test['orderProofImageURL']}',
+                        width: 300,
+                        height: 300, errorBuilder: (BuildContext context,
+                            Object exception, StackTrace? stackTrace) {
+                      return Image.network(
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxFLlzVp2jEn2Kx38_HsZiHYKtBJtQxxTg810DIpZS&s");
+                    }),
+                  )
+                  // Image.network(detail['orderProofImageURL'] , ),
+                  ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(32, 48, 61, 1))),
+                      onPressed: () {
+                        print("object");
+                        print("object//////////////////////////");
+
+                        print(test['orderID']);
+
+                        var docauth = db
+                            .collection("ordersPhysical")
+                            .doc(test['orderID']);
+                        confirm = true;
+                        docauth.update({
+                          // "authorID" : docauth.id,
+                          // "authorName": bookAuthorName.text,
+                          "orderPayed?": confirm,
+                        }).onError((e, _) => print(
+                            "Error writing document /////////////////////////////////////////////: $e"));
+                        //     Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => HomeScreen()),
+                        //   (Route<dynamic> route) => false,
+                        // );
+
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Confirmm'),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   width: 25.0,
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(vertical: 18),
+                  //   child: ElevatedButton(
+                  //     style: ButtonStyle(
+                  //       backgroundColor: MaterialStateProperty.all(Colors.red),
+                  //     ),
+                  //     onPressed: () {
+                  //       print("object");
+                  //       print("object//////////////////////////");
+
+                  //       print(test['orderID']);
+
+                  //       var docauth = db
+                  //           .collection("ordersPhysical")
+                  //           .doc(test['orderID']);
+
+                  //       docauth.delete().onError((e, _) => print(
+                  //           "Error writing document /////////////////////////////////////////////: $e"));
+
+                  //       // Navigator.pushAndRemoveUntil(
+                  //       //   context,
+                  //       //   MaterialPageRoute(
+                  //       //       builder: (context) => OrdersElectronique()),
+                  //       //   (Route<dynamic> route) => false,
+                  //       // );
+                  //       // Navigator.of(context).pop();
+                  //       Navigator.of(context).pop();
+                  //     },
+                  //     child: Text('Delete'),
+                  //   ),
+                  // ),
+                ],
               )
             ]),
           ),
